@@ -4,7 +4,7 @@ import os, json, datetime, email.utils
 from build import *
 from pages import URLS, track, w
 from pages2 import DOMAIN, TODAY
-from gen import rel, page, mark, esc, slugify, fmt, CATS, AGENTS, CFG, rows, OUT
+from gen import rel, page, mark, esc, slugify, fmt, CATS, AGENTS, CFG, rows, OUT, aff, aff_any, AFF
 
 # ============ AGENTS ============
 by_agent = {}
@@ -31,6 +31,36 @@ body = f"""<h1 style="font-size:clamp(26px,4vw,36px);letter-spacing:-.03em;margi
 {newsletter(1, "../")}"""
 w("agents/index.html", page(f"AI agents - {len(AGENTS)} tracked", "Browse use cases by the AI agent that did them.", body, 1, canonical=f"{DOMAIN}/agents/"))
 track("agents/index.html", 1)
+
+# ============ TOOLS (monetisation surface) ============
+trows, live_aff = [], 0
+for a, n in AGENTS.most_common():
+    rs = by_agent.get(slugify(a), [])
+    if not rs:
+        continue
+    r0 = rs[0]
+    cfg = aff_any(a) or {}
+    label = cfg.get("label") or a
+    note = cfg.get("note") or f"{n} use cases on this site"
+    url = (cfg.get("url") or "").strip()
+    if url:
+        live_aff += 1
+        cta = f'<a class="go on" href="{esc(url)}" target="_blank" rel="sponsored nofollow noopener">Get it</a>'
+    else:
+        cta = f'<a class="go" href="agents/{slugify(a)}/index.html">Browse</a>'
+    trows.append(
+        f'<div class="toolrow">{mark(r0["code"], r0["color"])}'
+        f'<span class="nm"><b>{esc(label)}</b><small>{esc(note)}</small></span>{cta}</div>'
+    )
+_disc = AFF.get("disclosure", "")
+disc_html = f'<p class="disc" style="margin-top:20px">{esc(_disc)}</p>' if live_aff else ""
+tbody = f"""<h1 style="font-size:clamp(26px,4vw,36px);letter-spacing:-.03em;margin:40px 0 8px">Tools</h1>
+<p class="lede" style="color:var(--muted);max-width:62ch">Every AI tool that shows up in the {len(rows)} use cases here, ranked by how often it appears. Start with the one at the top.</p>
+<div class="toolbox">{''.join(trows)}</div>
+{disc_html}
+{newsletter(0, "")}"""
+w("tools.html", page(f"AI agent tools - {len(AGENTS)} ranked", f"Every AI tool featured in the {len(rows)} use cases on {CFG['brand']}, ranked by usage.", tbody, 0, canonical=f"{DOMAIN}/tools.html"))
+track("tools.html", 0)
 
 for slug, n in alist:
     items = sorted(by_agent.get(slug, []), key=lambda r: r.get("slug",""))

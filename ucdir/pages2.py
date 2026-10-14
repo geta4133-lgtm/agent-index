@@ -3,7 +3,7 @@
 import os, json, datetime, re
 from build import *
 from pages import URLS, track, w
-from gen import rel, page, mark, esc, slugify, fmt, CATS, AGENTS, CFG, rows, OUT
+from gen import rel, page, mark, esc, slugify, fmt, CATS, AGENTS, CFG, rows, OUT, aff, aff_any, AFF
 
 DOMAIN = CFG["domain"].rstrip("/")
 TODAY = datetime.date.today().isoformat()
@@ -45,6 +45,16 @@ for i, r in enumerate(rows):
   <button class="copybtn" data-copy="#p{esc(r['slug'])}">Copy prompt</button></div>
   <pre id="p{esc(r['slug'])}">{esc(prompt)}</pre>
 </div>"""
+    _a = aff(r["agent"])
+    affbox = ""
+    if _a:
+        _note = f"<p class=\"affnote\">{esc(_a.get('note',''))}</p>" if _a.get("note") else ""
+        affbox = f"""<div class="affbox">
+  <div class="hd"><h2>Get {esc(_a['label'])}</h2><span class="afftag">affiliate</span></div>
+  {_note}
+  <a class="affbtn" href="{esc(_a['url'])}" target="_blank" rel="sponsored nofollow noopener">Try {esc(_a['label'])} &#8594;</a>
+  <p class="disc">{esc(AFF.get('disclosure',''))}</p>
+</div>"""
     src = ""
     if r.get("source_url"):
         plat = f" on {esc(r['source_platform'])}" if r.get("source_platform") else ""
@@ -57,6 +67,7 @@ for i, r in enumerate(rows):
   <p class="agentline">Done with <a class="agentpill" href="{b}agents/{r['agent_slug']}/index.html">{mark(r['code'], r['color'])}{esc(r['agent'])}</a></p>
   <div class="blocks">{blocks}</div>
   {pbox}
+  {affbox}
   {src}
   {rel_html}
   {newsletter(depth, b)}

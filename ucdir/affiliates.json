@@ -1,0 +1,101 @@
+{
+  "_readme": "Isi 'url' dengan link affiliate lo setelah daftar program. Kosong = CTA gak muncul (aman). 'program' = halaman pendaftaran. VERIFIKASI tiap link sebelum daftar — program affiliate sering berubah.",
+  "disclosure": "Beberapa link di halaman ini adalah link affiliate. Kalau lo daftar lewat situ, kami dapat komisi tanpa biaya tambahan buat lo.",
+  "tools": {
+    "n8n": {
+      "label": "n8n",
+      "url": "",
+      "program": "https://n8n.io/affiliates/",
+      "note": "Workflow automation, self-host gratis. Komisi umumnya 30-50% tahun pertama."
+    },
+    "Zapier Agents": {
+      "label": "Zapier",
+      "url": "",
+      "program": "https://zapier.com/affiliate",
+      "note": "Raja integrasi. Komisi recurring ~20-30% selama pelanggan langganan."
+    },
+    "Make": {
+      "label": "Make",
+      "url": "",
+      "program": "https://www.make.com/en/affiliate-program",
+      "note": "Automation visual. Recurring commission, pembayaran bulanan."
+    },
+    "Manus": {
+      "label": "Manus",
+      "url": "",
+      "program": "",
+      "note": "Belum ada program publik — pakai referral code pribadi kalau ada."
+    },
+    "Lindy": {
+      "label": "Lindy",
+      "url": "",
+      "program": "https://www.lindy.ai/affiliates",
+      "note": "AI assistant buat kerjaan kantor. Cek program partner-nya."
+    },
+    "Cursor": {
+      "label": "Cursor",
+      "url": "",
+      "program": "",
+      "note": "Belum ada program affiliate resmi — pakai referral link dari dashboard akun lo."
+    },
+    "Replit Agent": {
+      "label": "Replit",
+      "url": "",
+      "program": "https://replit.com/refer",
+      "note": "Referral user-to-user, kredit gratis per invite yang langganan."
+    },
+    "Perplexity Comet": {
+      "label": "Perplexity",
+      "url": "",
+      "program": "",
+      "note": "Ada program referral Pro. Cek di halaman akun lo."
+    },
+    "Devin": {
+      "label": "Devin",
+      "url": "",
+      "program": "",
+      "note": "Enterprise, gak ada affiliate publik."
+    },
+    "Claude Code": {
+      "label": "Claude Code",
+      "url": "",
+      "program": "",
+      "note": "Anthropic gak punya affiliate program. Monetisasi lewat konten/tutorial aja."
+    },
+    "ChatGPT Agent": {
+      "label": "ChatGPT",
+      "url": "",
+      "program": "",
+      "note": "OpenAI gak punya affiliate program publik."
+    },
+    "GitHub Copilot": {
+      "label": "GitHub Copilot",
+      "url": "",
+      "program": "",
+      "note": "Gak ada affiliate; tapi GitHub Student Pack bisa jadi konten."
+    }
+  },
+  "hosting": {
+    "_note": "Kalau nanti nambah halaman 'setup/tools stack', ini yang paling gede komisinya.",
+    "Hostinger": {
+      "url": "",
+      "program": "https://www.hostinger.com/affiliates",
+      "note": "Hosting murah, komisi tinggi utk audience Indonesia."
+    },
+    "DigitalOcean": {
+      "url": "",
+      "program": "https://www.digitalocean.com/affiliates",
+      "note": "$200 kredit referral."
+    },
+    "Vercel": {
+      "url": "",
+      "program": "",
+      "note": "Gak ada affiliate publik."
+    },
+    "Cloudflare": {
+      "url": "",
+      "program": "",
+      "note": "Gak ada affiliate."
+    }
+  }
+}

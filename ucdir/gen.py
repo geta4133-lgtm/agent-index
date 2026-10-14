@@ -21,7 +21,51 @@ CFG = {
     "sponsor_price": "$190", "sponsor_slots": "2 sold - 3 open this quarter",
     "newsletter_action": "#",
     "twitter": "",
+    # Analytics: set "provider" to goatcounter|cloudflare|plausible and fill "code".
+    # GoatCounter (free): sign up at goatcounter.com, use yourcode like "agentindex".
+    "analytics": {"provider": "", "code": ""},
 }
+
+# ---------- affiliates ----------
+_AFFPATH = os.path.join(HERE, "affiliates.json")
+AFF = json.load(open(_AFFPATH)) if os.path.exists(_AFFPATH) else {"tools": {}, "disclosure": ""}
+
+def _norm_aff(o):
+    """Recursively replace em/en dashes so the anti-slop sweep stays clean."""
+    if isinstance(o, dict):
+        return {k: _norm_aff(v) for k, v in o.items()}
+    if isinstance(o, list):
+        return [_norm_aff(v) for v in o]
+    if isinstance(o, str):
+        return o.replace("\u2014", " - ").replace("\u2013", "-")
+    return o
+
+AFF = _norm_aff(AFF)
+
+def aff(agent_name):
+    """Return {'label','url','note'} for a tool, or None if not configured."""
+    t = (AFF.get("tools") or {}).get(agent_name)
+    if not t or not t.get("url"):
+        return None
+    return t
+
+def aff_any(agent_name):
+    """Return the config for a tool even without a live url (for the tools page)."""
+    return (AFF.get("tools") or {}).get(agent_name)
+
+def analytics_snippet():
+    a = CFG.get("analytics") or {}
+    p, c = (a.get("provider") or "").strip(), (a.get("code") or "").strip()
+    if not p or not c:
+        return ""
+    if p == "goatcounter":
+        return ('<script data-goatcounter="https://%s.goatcounter.com/count" '
+                'async src="//gc.zgo.at/count.js"></script>' % esc(c))
+    if p == "cloudflare":
+        return '<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon=\'{"token":"%s"}\'></script>' % esc(c)
+    if p == "plausible":
+        return ('<script defer data-domain="%s" src="https://plausible.io/js/script.js"></script>' % esc(c))
+    return ""
 
 PALETTE = ["#7dd3fc","#5aabff","#818cf8","#a78bfa","#c084fc","#e879f9","#f472b6","#fb7185",
            "#fda4af","#fcd34d","#a3e635","#4ade80","#2dd4bf","#60a5fa","#f97316","#f87171"]
@@ -92,6 +136,7 @@ def page(title, desc, body, depth=0, extra_head="", canonical="", jsonld=""):
 <link rel="stylesheet" href="{r}static/style.css">
 <script>(function(){{try{{var t=localStorage.getItem("uc-theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t);var u=Number(localStorage.getItem("uc-sponsor-hidden"));if(Number.isFinite(u)&&u>Date.now())document.documentElement.setAttribute("data-sponsor-hidden","");}}catch(e){{}}}})();</script>
 {extra_head}
+{analytics_snippet()}
 {jsonld}
 </head>
 <body>
@@ -113,6 +158,7 @@ def page(title, desc, body, depth=0, extra_head="", canonical="", jsonld=""):
     <nav>
       <a class="keep" href="{r}index.html">Use cases</a>
       <a href="{r}agents/index.html">Agents</a>
+      <a href="{r}tools.html">Tools</a>
       <a href="{r}topics.html">Topics</a>
       <a href="{r}about.html">About</a>
       <a class="cta" href="{r}sponsor.html">Sponsor</a>

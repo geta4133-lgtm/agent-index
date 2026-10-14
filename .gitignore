@@ -3,3 +3,9 @@ __pycache__/
 ucdir/public/
 .ghpages/
 .DS_Store
+
+# secrets and runtime state - never commit
+ucdir/social.json
+ucdir/posted.json
+ucdir/posted_x.json
+ucdir/daily.log

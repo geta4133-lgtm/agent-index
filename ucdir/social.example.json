@@ -1,0 +1,14 @@
+{
+  "_readme": "Isi nilai di sini buat aktifin auto-posting. Kosong = poster senyap (gak error).",
+  "_telegram": "1) Buat channel Telegram. 2) Add bot lo sebagai admin channel. 3) Isi tg_token + tg_chat (@namachannel atau -100xxxxxxxxxx).",
+  "tg_token": "",
+  "tg_chat": "",
+  "_x": "Daftar di developer.x.com -> Project -> Keys and tokens. Butuh 4 value di bawah (OAuth 1.0a, write access).",
+  "x_consumer_key": "",
+  "x_consumer_secret": "",
+  "x_access_token": "",
+  "x_access_secret": "",
+  "count": 3,
+  "site": "https://geta4133-lgtm.github.io/agent-index",
+  "hashtags": "#AI #AIAgents #Automation"
+}
