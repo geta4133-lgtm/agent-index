@@ -1,0 +1,43 @@
+# Rebuild the directory and deploy to GitHub Pages.
+# Content is refreshed locally (python3 refresh.py) and committed; CI just rebuilds + ships.
+name: build-and-deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Build site
+        run: python3 ucdir/pages4.py
+      - name: Audit (fails on broken links)
+        run: python3 ucdir/audit.py
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: ucdir/public
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

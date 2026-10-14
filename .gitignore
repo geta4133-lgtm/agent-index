@@ -1,0 +1,5 @@
+__pycache__/
+*.pyc
+ucdir/public/
+.ghpages/
+.DS_Store
