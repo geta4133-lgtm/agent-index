@@ -2,7 +2,7 @@
 """Audit built site: link integrity + anti-slop pre-flight."""
 import os, re, collections, sys
 
-OUT = os.path.expanduser("~/ucdir/public")
+OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "public")
 html_files = []
 for dp, dn, fs in os.walk(OUT):
     for f in fs:
@@ -59,3 +59,7 @@ print("\ninventory:", dict(inv))
 for f in ["sitemap.xml", "feed.xml", "robots.txt", "search-index.json", "static/style.css", "static/app.js"]:
     p = os.path.join(OUT, f)
     print(f"  {f}: {'OK' if os.path.exists(p) else 'MISSING'} ({os.path.getsize(p) if os.path.exists(p) else 0} B)")
+
+# non-zero exit so CI fails on a broken build
+bad = sum(missing.values()) + sum(issues.values()) + (0 if html_files else 1)
+sys.exit(1 if bad else 0)
