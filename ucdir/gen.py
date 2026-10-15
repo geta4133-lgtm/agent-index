@@ -14,7 +14,7 @@ OUT = os.path.join(HERE, "public")
 
 CFG = {
     "brand": "Agent Index",
-    "domain": "https://agentindex.example",
+    "domain": "https://kuhaku.web.id",
     "tagline": "Real things people get AI agents to do.",
     "desc": "A directory of real AI agent use cases, each with the prompt to try it.",
     "sponsor": {"name": "Your product", "pitch": "Reach builders who ship with agents", "url": "#", "live": False},
