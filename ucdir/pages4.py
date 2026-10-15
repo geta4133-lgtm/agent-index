@@ -45,6 +45,9 @@ w("feed.xml", rss)
 
 w("robots.txt", f"User-agent: *\nAllow: /\n\nSitemap: {DOMAIN}/sitemap.xml\n")
 
+# IndexNow key (Bing/Yandex/DuckDuckGo/Seznam auto-discovery)
+w("d7bc6a57760d5cc55250bae50ecd6a2f.txt", "d7bc6a57760d5cc55250bae50ecd6a2f")
+
 # ---- report ----
 n_html = sum(1 for _, _, fs in os.walk(OUT) for f in fs if f.endswith(".html"))
 total = sum(os.path.getsize(os.path.join(dp, f)) for dp, _, fs in os.walk(OUT) for f in fs)
