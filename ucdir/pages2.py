@@ -73,9 +73,23 @@ for i, r in enumerate(rows):
   {newsletter(depth, b)}
 </article>"""
     ttl = f"{r['title']} with {r['agent']}"
-    ld = json.dumps({"@context":"https://schema.org","@type":"Article","headline":r["title"],
-                     "about":r["agent"],"articleSection":r["category"],"datePublished":TODAY,
-                     "mainEntityOfPage":f"{DOMAIN}/use-case/{r['slug']}/"})
+    _S = "https://" + "schema.org" + "/" + chr(35)   # avoids literal URL mangling
+    _q = f"What is {r['title']}?"
+    _breadcrumb = [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": f"{DOMAIN}/"},
+        {"@type": "ListItem", "position": 2, "name": r["category"], "item": f"{DOMAIN}/category/{r['cat_slug']}/"},
+        {"@type": "ListItem", "position": 3, "name": r["title"]},
+    ]
+    ld = json.dumps([
+        {"@context": _S, "@type": "Article", "headline": r["title"],
+          "about": r["agent"], "articleSection": r["category"], "datePublished": TODAY,
+          "mainEntityOfPage": f"{DOMAIN}/use-case/{r['slug']}/"},
+        {"@context": _S, "@type": "BreadcrumbList", "itemListElement": _breadcrumb},
+        {"@context": _S, "@type": "FAQPage", "mainEntity": [
+            {"@type": "Question", "name": _q, "acceptedAnswer": {"@type": "Answer", "text": r.get("summary", "")}},
+            {"@type": "Question", "name": "What AI agent does this use case use?", "acceptedAnswer": {"@type": "Answer", "text": f"{r['agent']}, in {r['category']}."}},
+        ]},
+    ])
     jsonld = f'<script type="application/ld+json">{ld}</script>'
     w(f"use-case/{r['slug']}/index.html", page(ttl, r.get("summary",""), body, depth,
         canonical=f"{DOMAIN}/use-case/{r['slug']}/", jsonld=jsonld))
