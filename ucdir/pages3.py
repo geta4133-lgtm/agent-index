@@ -100,7 +100,7 @@ body = f"""<h1 style="font-size:clamp(26px,4vw,36px);letter-spacing:-.03em;margi
       <li>A sponsored line with your pitch and link in every Daily 5 email that week.</li>
       <li>Goes live once approved. Queued after any running slot.</li>
     </ul>
-    <a class="btn" href="mailto:sponsor@example.com?subject=Sponsorship">Book a slot</a>
+    <a class="btn" href="mailto:aikuhaku9@gmail.com?subject=Sponsorship%20-%20kuhaku.web.id">Book a slot</a>
   </div>
   <div class="pcard">
     <div class="amt" style="font-size:22px">Who visits</div>
