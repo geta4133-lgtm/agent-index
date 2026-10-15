@@ -18,7 +18,7 @@ CFG = {
     "tagline": "Real things people get AI agents to do.",
     "desc": "A directory of real AI agent use cases, each with the prompt to try it.",
     "sponsor": {"name": "Your product", "pitch": "Reach builders who ship with agents", "url": "#", "live": False},
-    "sponsor_price": "$190", "sponsor_slots": "2 sold - 3 open this quarter",
+    "sponsor_price": "$39", "sponsor_slots": "3 slots open this month",
     "newsletter_action": "#",
     "twitter": "",
     # Analytics: set "provider" to goatcounter|cloudflare|plausible and fill "code".
