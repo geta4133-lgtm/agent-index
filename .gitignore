@@ -9,3 +9,4 @@ ucdir/social.json
 ucdir/posted.json
 ucdir/posted_x.json
 ucdir/daily.log
+*.bak*
