@@ -16,10 +16,10 @@ def tourl(p):
 # ---- /new/ page (latest 50, real freshness signal for crawlers) ----
 latest_new = sorted(rows, key=lambda r: r.get("slug",""), reverse=True)[:50]
 body_new = f"""<h2 class="sect">Newest use cases</h2>
-<p class="lede">The 50 most recent additions to the directory. Subscribe via <a href="/feed.xml">RSS</a>.</p>
-{list_html(latest_new, 1)}
-<p style="margin-top:22px"><a class="btn ghost" href="all/index.html">Browse all {fmt(len(rows))} use cases</a></p>
-{newsletter(1)}"""
+<p class="lede">The 50 most recent additions to the directory. Subscribe via <a href="../feed.xml">RSS</a>.</p>
+{list_html(latest_new, 1, "../")}
+<p style="margin-top:22px"><a class="btn ghost" href="../all/index.html">Browse all {fmt(len(rows))} use cases</a></p>
+{newsletter(1, "../")}"""
 w("new/index.html", page(f"Newest AI agent use cases - {CFG['brand']}",
    "The 50 newest real AI agent use cases added to Agent Index, each with the prompt to try it.",
    body_new, 1, canonical=CFG["domain"] + "/new/"))
