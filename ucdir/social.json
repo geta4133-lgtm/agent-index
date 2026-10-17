@@ -1,0 +1,8 @@
+{
+ "tg_token": "ISI_TOKEN_BOT_DARI_BOTFATHER",
+ "tg_chat": "@namachannel_kamu",
+ "count": 3,
+ "site": "https://kuhaku.web.id",
+ "hashtags": "#AI #AIAgents #Automation #n8n",
+ "_catatan": "tg_token dari @BotFather. tg_chat = username channel publik (pakai @) atau chat_id numerik. Bot WAJIB jadi admin channel."
+}
