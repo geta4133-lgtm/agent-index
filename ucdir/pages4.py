@@ -56,7 +56,7 @@ for _cat in sorted(_by_cat, key=lambda c: -len(_by_cat[c])):
             f'<pre class="promptbox-pre"><code>{esc(_r["try_prompt"].strip())}</code></pre></div>')
     _pblocks.append(f'<h2 class="sect">{esc(_cat)}</h2>' + "".join(_items))
 
-body_prompts = f"""<h2 class="sect">100 AI agent prompts that actually worked</h2>
+body_prompts = f"""<h1>100 AI agent prompts that actually worked</h1>
 <p class="lede">Every prompt below comes from a real documented use case &mdash; someone asked, it ran, here is what happened. Copy it, replace the [brackets], run. No signup, no email wall.</p>
 <div class="statrow">
   <div class="stat"><b>{fmt(len(rows))}</b><span>use cases in the directory</span></div>
