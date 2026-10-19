@@ -111,6 +111,16 @@ w("robots.txt", f"User-agent: *\nAllow: /\n\nSitemap: {DOMAIN}/sitemap.xml\n")
 w("d7bc6a57760d5cc55250bae50ecd6a2f.txt", "d7bc6a57760d5cc55250bae50ecd6a2f")
 
 
+# ---- assets: static/ + favicon (pages4.py is the only CI entry point) ----
+import shutil as _sh
+_sh.copytree(os.path.join(HERE, "static"), os.path.join(OUT, "static"), dirs_exist_ok=True)
+for _f in ("favicon.png", "logo.png", "og.png"):
+    _src = os.path.join(HERE, "static", _f)
+    if os.path.exists(_src):
+        _sh.copy(_src, os.path.join(OUT, _f))
+print("  assets copied: static/, favicon.png, logo.png, og.png")
+
+
 # ---- report ----
 n_html = sum(1 for _, _, fs in os.walk(OUT) for f in fs if f.endswith(".html"))
 total = sum(os.path.getsize(os.path.join(dp, f)) for dp, _, fs in os.walk(OUT) for f in fs)
