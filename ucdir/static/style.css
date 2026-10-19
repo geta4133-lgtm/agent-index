@@ -228,6 +228,11 @@ footer.site {
   display: flex; gap: 16px; flex-wrap: wrap;
 }
 footer.site a:hover { color: var(--text); }
+footer.site .wrap {
+  display: flex; justify-content: space-between; align-items: center;
+  gap: 12px; flex-wrap: wrap; padding-top: 18px; padding-bottom: 18px;
+}
+footer.site .fl { color: var(--faint); }
 
 /* ---------- misc ---------- */
 .empty { padding: 40px 0; color: var(--faint); }
