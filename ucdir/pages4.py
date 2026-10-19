@@ -25,6 +25,53 @@ w("new/index.html", page(f"Newest AI agent use cases - {CFG['brand']}",
    body_new, 1, canonical=CFG["domain"] + "/new/"))
 print("  /new/ page written:", len(latest_new), "cards")
 
+# ---- /prompts/ page: 100 best prompts (lead magnet, no signup) ----
+from collections import defaultdict as _dd
+_by_agent = _dd(list)
+for _r in rows:
+    if _r.get("try_prompt"):
+        _by_agent[_r.get("try_agent", "?")].append(_r)
+_picked = []
+_idx = {a: 0 for a in _by_agent}
+while len(_picked) < 100:
+    _added = False
+    for _a, _lst in sorted(_by_agent.items(), key=lambda x: -len(x[1])):
+        if _idx[_a] < len(_lst) and len(_picked) < 100:
+            _picked.append(_lst[_idx[_a]]); _idx[_a] += 1; _added = True
+    if not _added:
+        break
+_by_cat = _dd(list)
+for _r in _picked:
+    _by_cat[_r.get("category", "Other")].append(_r)
+
+_pblocks = []
+_n = 0
+for _cat in sorted(_by_cat, key=lambda c: -len(_by_cat[c])):
+    _items = []
+    for _r in _by_cat[_cat]:
+        _n += 1
+        _items.append(
+            f'<div class="uc"><h3><a href="../use-case/{_r["slug"]}/">{esc(_r["title"])}</a></h3>'
+            f'<p class="meta">{esc(_r.get("try_agent",""))}</p>'
+            f'<pre class="promptbox-pre"><code>{esc(_r["try_prompt"].strip())}</code></pre></div>')
+    _pblocks.append(f'<h2 class="sect">{esc(_cat)}</h2>' + "".join(_items))
+
+body_prompts = f"""<h2 class="sect">100 AI agent prompts that actually worked</h2>
+<p class="lede">Every prompt below comes from a real documented use case &mdash; someone asked, it ran, here is what happened. Copy it, replace the [brackets], run. No signup, no email wall.</p>
+<div class="statrow">
+  <div class="stat"><b>{fmt(len(rows))}</b><span>use cases in the directory</span></div>
+  <div class="stat"><b>100</b><span>prompts on this page</span></div>
+  <div class="stat"><b>{fmt(len(_by_agent))}</b><span>different agents</span></div>
+</div>
+{"".join(_pblocks)}
+<p style="margin-top:22px"><a class="btn ghost" href="../all/index.html">Browse all {fmt(len(rows))} use cases</a></p>
+{newsletter(1, "../")}"""
+w("prompts/index.html", page(f"100 AI agent prompts that actually worked - {CFG['brand']}",
+   "100 copy-paste AI agent prompts from real documented use cases. What people asked, how it went, and the exact prompt.",
+   body_prompts, 1, canonical=CFG["domain"] + "/prompts/"))
+print("  /prompts/ page written:", _n, "prompts")
+track("prompts/index.html", 1)
+
 
 skip = {"404.html"}
 track("new/index.html", 1)
