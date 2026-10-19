@@ -172,6 +172,12 @@ def page(title, desc, body, depth=0, extra_head="", canonical="", jsonld=""):
 {body}
 </main>
 {sponsor_bar(depth)}
+<footer class="site">
+  <div class="wrap">
+    <span>&copy; 2026 {esc(CFG['brand'])} &middot; <a href="{r}about.html">About</a> &middot; <a href="{r}privacy.html">Privacy</a> &middot; <a href="{r}feed.xml">RSS</a></span>
+    <span class="fl">Listed on <a href="https://www.aitoolzdir.com" target="_blank" rel="noopener">AIToolzDir</a> &middot; <a href="https://zerocostai.pro" target="_blank" rel="noopener">ZeroCostAI</a></span>
+  </div>
+</footer>
 <script src="{r}static/app.js" defer></script>
 </body>
 </html>
