@@ -67,11 +67,25 @@ for slug, n in alist:
     if not items: continue
     a = items[0]
     depth, b = 2, "../../"
-    body = f"""<h2 class="sect">{esc(a['agent'])}</h2>
-<p class="stats"><span><b>{len(items)}</b> use cases</span></p>
+    body = f"""<h1>{esc(a['agent'])} use cases</h1>
+<p class="lede">{len(items)} real things people got {esc(a['agent'])} to do, each with what they asked, how it went, and the prompt to copy.</p>
 {list_html(items, depth, b)}
 {newsletter(depth, b)}"""
-    w(f"agents/{slug}/index.html", page(f"{a['agent']} use cases", f"{len(items)} things people got {a['agent']} to do.", body, depth, canonical=f"{DOMAIN}/agents/{slug}/"))
+    _S = "https://" + "schema.org" + "/" + chr(35)
+    _ld = json.dumps([
+        {"@context": _S, "@type": "CollectionPage", "name": f"{a['agent']} use cases",
+         "description": f"{len(items)} documented {a['agent']} use cases.",
+         "mainEntityOfPage": f"{DOMAIN}/agents/{slug}/"},
+        {"@context": _S, "@type": "FAQPage", "mainEntity": [
+            {"@type": "Question", "name": f"What can {a['agent']} actually do?",
+             "acceptedAnswer": {"@type": "Answer", "text": f"{len(items)} documented use cases show what people got {a['agent']} to do, including the exact prompt used and how each one turned out."}},
+            {"@type": "Question", "name": "Are these real use cases?",
+             "acceptedAnswer": {"@type": "Answer", "text": "Yes. Every entry comes from a documented real-world attempt, with what was asked, how it went, and the prompt to copy."}},
+        ]},
+    ])
+    jsonld = f'<script type="application/ld+json">{_ld}</script>'
+    w(f"agents/{slug}/index.html", page(f"{len(items)} {a['agent']} use cases - real prompts and results",
+       f"{len(items)} documented {a['agent']} use cases with the exact prompt used and how each one turned out.", body, depth, canonical=f"{DOMAIN}/agents/{slug}/", jsonld=jsonld))
     track(f"agents/{slug}/index.html", depth)
 
 # ============ TOPICS ============
