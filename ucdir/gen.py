@@ -23,7 +23,7 @@ CFG = {
     "twitter": "",
     # Analytics: set "provider" to goatcounter|cloudflare|plausible and fill "code".
     # GoatCounter (free): sign up at goatcounter.com, use yourcode like "agentindex".
-    "analytics": {"provider": "", "code": ""},
+    "analytics": {"provider": "goatcounter", "code": "kuhaku"},
 }
 
 # ---------- affiliates ----------
