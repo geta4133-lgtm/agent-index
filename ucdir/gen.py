@@ -125,6 +125,12 @@ def page(title, desc, body, depth=0, extra_head="", canonical="", jsonld=""):
 <meta property="og:description" content="{esc(desc)}">
 <meta property="og:type" content="website">
 <meta property="og:url" content="{esc(canonical or CFG['domain'])}">
+<link rel="icon" type="image/png" href="{r}favicon.png">
+<link rel="apple-touch-icon" href="{r}favicon.png">
+<meta property="og:image" content="{esc(canonical or CFG['domain'])}static/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:image" content="{esc(canonical or CFG['domain'])}static/og.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{esc(title)}">
 <meta name="twitter:description" content="{esc(desc)}">
