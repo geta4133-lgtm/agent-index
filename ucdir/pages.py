@@ -24,6 +24,12 @@ body = f"""<section class="hero">
 <h2 class="sect">Latest use cases <span id="resultCount" class="mono" style="text-transform:none;letter-spacing:0"></span></h2>
 {list_html(latest, 0)}
 <p class="empty" id="noResults" style="display:none">No matches. Try a different word.</p>
+<div class="quicklinks">
+  <a class="ql" href="prompts/index.html"><b>100 prompts</b><span>that actually worked, ready to copy</span></a>
+  <a class="ql" href="agents/index.html"><b>{len(AGENTS)} agents</b><span>ranked by how often they show up</span></a>
+  <a class="ql" href="topics.html"><b>{len(CATS)} categories</b><span>work, devops, money, travel and more</span></a>
+  <a class="ql" href="new/index.html"><b>Newest</b><span>the 50 most recent additions</span></a>
+</div>
 <p style="margin-top:22px"><a class="btn ghost" href="all/index.html">Browse all {fmt(len(rows))} use cases</a></p>
 {newsletter(0)}
 """
