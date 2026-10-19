@@ -231,6 +231,15 @@ footer.site a:hover { color: var(--text); }
 
 /* ---------- misc ---------- */
 .empty { padding: 40px 0; color: var(--faint); }
+.quicklinks { display: grid; gap: 10px; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); margin: 26px 0 6px; }
+.ql {
+  border: 1px solid var(--line); border-radius: var(--radius); padding: 13px 15px;
+  background: var(--surface); display: block; transition: border-color 160ms ease, transform 160ms ease;
+}
+.ql:hover { border-color: var(--faint); }
+.ql:active { transform: scale(0.99); }
+.ql b { display: block; font-size: 14.5px; letter-spacing: -.01em; }
+.ql span { display: block; font-size: 12.5px; color: var(--faint); margin-top: 3px; line-height: 1.45; }
 .gridcards { display: grid; gap: 12px; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); margin: 22px 0; }
 .gcard {
   border: 1px solid var(--line); border-radius: var(--radius); padding: 15px;
