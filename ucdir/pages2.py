@@ -16,12 +16,24 @@ for c, n in CATS.most_common():
     cs = slugify(c)
     items = sorted(by_cat.get(cs, []), key=lambda r: r.get("slug",""))
     depth, b = 2, "../../"
-    body = f"""<h2 class="sect">{esc(c)}</h2>
+    body = f"""<h1>{esc(c)} AI agent use cases</h1>
+<p class="lede">{len(items)} real things people got AI agents to do in {esc(c)}, each with what they asked, how it went, and the prompt to copy.</p>
 {chips(depth, active=cs, base=b)}
-<p class="stats"><span><b>{len(items)}</b> use cases</span></p>
 {list_html(items, depth, b)}
 {newsletter(depth, b)}"""
-    w(f"category/{cs}/index.html", page(f"{c} - AI agent use cases", f"{len(items)} AI agent use cases in {c}.", body, depth, canonical=f"{DOMAIN}/category/{cs}/"))
+    _S = "https://" + "schema.org" + "/" + chr(35)
+    _ld = json.dumps([
+        {"@context": _S, "@type": "CollectionPage", "name": f"{c} AI agent use cases",
+         "description": f"{len(items)} documented AI agent use cases in {c}.",
+         "mainEntityOfPage": f"{DOMAIN}/category/{cs}/"},
+        {"@context": _S, "@type": "FAQPage", "mainEntity": [
+            {"@type": "Question", "name": f"What can AI agents do in {c}?",
+             "acceptedAnswer": {"@type": "Answer", "text": f"{len(items)} documented use cases show what people got AI agents to do in {c}, including the exact prompt used and how each one turned out."}},
+        ]},
+    ])
+    jsonld = f'<script type="application/ld+json">{_ld}</script>'
+    w(f"category/{cs}/index.html", page(f"{len(items)} {c} AI agent use cases - real prompts and results",
+       f"{len(items)} documented AI agent use cases in {c}, with the exact prompt used and how each one turned out.", body, depth, canonical=f"{DOMAIN}/category/{cs}/", jsonld=jsonld))
     track(f"category/{cs}/index.html", depth)
 
 # ============ DETAIL PAGES ============
