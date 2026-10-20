@@ -84,9 +84,7 @@ for i, r in enumerate(rows):
   {rel_html}
   {newsletter(depth, b)}
 </article>"""
-    _t = r['title'].strip()
-    _a = r['agent'].strip()
-    ttl = _t if _a.lower() in _t.lower() else f"{_t} with {_a}"
+    ttl = r['title'].strip()
     _S = "https://" + "schema.org" + "/" + chr(35)   # avoids literal URL mangling
     _q = f"What is {r['title']}?"
     _breadcrumb = [
