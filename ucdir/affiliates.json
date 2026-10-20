@@ -1,12 +1,12 @@
 {
- "_readme": "Isi 'url' dengan link affiliate lo setelah daftar program. Kosong = CTA gak muncul (aman). 'program' = halaman pendaftaran. VERIFIKASI tiap link sebelum daftar — program affiliate sering berubah.",
+ "_readme": "Isi 'url' dengan link affiliate lo setelah daftar program. Kosong = CTA gak muncul (aman). 'program' = halaman pendaftaran. VERIFIKASI tiap link sebelum daftar \u2014 program affiliate sering berubah.",
  "disclosure": "Beberapa link di halaman ini adalah link affiliate. Kalau lo daftar lewat situ, kami dapat komisi tanpa biaya tambahan buat lo.",
  "tools": {
   "n8n": {
    "label": "n8n",
    "url": "",
    "program": "https://n8n.io/affiliates/",
-   "note": "Workflow automation, self-host gratis. Komisi umumnya 30-50% tahun pertama."
+   "note": "REJECTED 18 Okt 2026."
   },
   "Zapier Agents": {
    "label": "Zapier",
@@ -24,7 +24,7 @@
    "label": "Manus",
    "url": "",
    "program": "",
-   "note": "Belum ada program publik — pakai referral code pribadi kalau ada."
+   "note": "Belum ada program publik \u2014 pakai referral code pribadi kalau ada."
   },
   "Lindy": {
    "label": "Lindy",
@@ -36,7 +36,7 @@
    "label": "Cursor",
    "url": "",
    "program": "",
-   "note": "Belum ada program affiliate resmi — pakai referral link dari dashboard akun lo."
+   "note": "Belum ada program affiliate resmi \u2014 pakai referral link dari dashboard akun lo."
   },
   "Replit Agent": {
    "label": "Replit",
@@ -84,7 +84,7 @@
    "label": "ClickUp",
    "url": "",
    "program": "https://clickup.com/affiliate",
-   "note": "Project management all-in-one. Aplikasi sudah dikirim 19 Okt 2026."
+   "note": "REJECTED 19 Okt 2026."
   },
   "Intercom": {
    "label": "Intercom",
