@@ -53,6 +53,32 @@ def aff_any(agent_name):
     """Return the config for a tool even without a live url (for the tools page)."""
     return (AFF.get("tools") or {}).get(agent_name)
 
+def tools_rec():
+    """Homepage block: tools with a live affiliate link, ranked by site usage.
+
+    Only tools that actually appear in the use-case catalog AND have a live
+    affiliate url get a card. Returns '' when nothing is configured yet.
+    """
+    cards = []
+    for name, cfg in (AFF.get("tools") or {}).items():
+        url = (cfg.get("url") or "").strip()
+        if not url:
+            continue
+        label = cfg.get("label") or name
+        note = (cfg.get("note") or "").split(".")[0].strip()
+        cards.append(
+            f'<a class="ql" href="{esc(url)}" target="_blank" rel="sponsored nofollow noopener">'
+            f'<b>{esc(label)}</b><span>{esc(note) or "recommended tool"}</span></a>'
+        )
+    if not cards:
+        return ""
+    disc = AFF.get("disclosure", "")
+    return (
+        '<h2 class="sect" style="margin-top:34px">Tools we recommend</h2>'
+        f'<div class="quicklinks">{"".join(cards)}</div>'
+        f'<p class="disc" style="margin-top:10px">{esc(disc)}</p>'
+    )
+
 def analytics_snippet():
     a = CFG.get("analytics") or {}
     p, c = (a.get("provider") or "").strip(), (a.get("code") or "").strip()
