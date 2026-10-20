@@ -2,7 +2,7 @@
 """Write all site pages."""
 import os, json, datetime, html
 from build import *
-from gen import rel, page, mark, esc, slugify, fmt, CATS, AGENTS, CFG, rows, OUT
+from gen import rel, page, mark, esc, slugify, fmt, CATS, AGENTS, CFG, rows, OUT, tools_rec
 
 URLS = []
 
@@ -30,6 +30,7 @@ body = f"""<section class="hero">
   <a class="ql" href="topics.html"><b>{len(CATS)} categories</b><span>work, devops, money, travel and more</span></a>
   <a class="ql" href="new/index.html"><b>Newest</b><span>the 50 most recent additions</span></a>
 </div>
+{tools_rec()}
 <p style="margin-top:22px"><a class="btn ghost" href="all/index.html">Browse all {fmt(len(rows))} use cases</a></p>
 {newsletter(0)}
 """
