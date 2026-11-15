@@ -10,7 +10,7 @@ Modes:
 import os, sys, json, re, time, html, hashlib, datetime, urllib.request, urllib.parse
 
 HOME = os.path.expanduser("~")
-DATA = f"{HOME}/agentusecases/use_cases.json"
+DATA = os.environ.get("UC_DATA") or f"{HOME}/agentusecases/use_cases.json"
 UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120 Safari/537.36"
 SRC = "https://agentusecases.ai"
 

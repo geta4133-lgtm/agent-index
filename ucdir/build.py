@@ -13,6 +13,12 @@ if os.path.isdir(OUT):
 os.makedirs(OUT, exist_ok=True)
 shutil.copytree(os.path.join(HERE, "static"), os.path.join(OUT, "static"))
 
+# GitHub Pages custom domain: keep a CNAME in the artifact so every deploy preserves it.
+_cname = os.path.join(HERE, "..", "CNAME")
+if os.path.exists(_cname):
+    shutil.copyfile(_cname, os.path.join(OUT, "CNAME"))
+open(os.path.join(OUT, ".nojekyll"), "w").close()
+
 def row_html(r, depth=0, base=""):
     """base = prefix path from current page to site root dir."""
     href = f"{base}use-case/{r['slug']}/index.html"
